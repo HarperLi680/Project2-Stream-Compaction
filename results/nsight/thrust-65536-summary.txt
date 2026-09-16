@@ -1,0 +1,37 @@
+Generating SQLite file results/nsight/thrust-65536.sqlite from results/nsight/thrust-65536.nsys-rep
+Processing [results/nsight/thrust-65536.sqlite] with [/opt/nvidia/nsight-systems/2026.3.2/target-linux-x64/reports/cuda_api_sum.py]... 
+
+ ** CUDA API Summary (cuda_api_sum):
+
+ Time (%)  Total Time (ns)  Num Calls  Avg (ns)   Med (ns)  Min (ns)  Max (ns)   StdDev (ns)           Name         
+ --------  ---------------  ---------  ---------  --------  --------  ---------  -----------  ----------------------
+     87.5        161789222         75  2157189.6    1567.0      1258  159995337   18471900.0  cudaMalloc            
+      6.4         11797820        100   117978.2   14017.5      1697     435188     131623.5  cudaStreamSynchronize 
+      4.0          7435431         25   297417.2  332544.0      5857     392457      94512.0  cudaEventSynchronize  
+      1.1          2097739         75    27969.9    2925.0      2322     120427      36201.1  cudaFree              
+      0.7          1290797         50    25815.9   33674.0     14952      45967      10151.9  cudaMemcpyAsync       
+      0.2           331150         75     4415.3    3330.0      2511      38627       4331.4  cudaLaunchKernel      
+      0.1           100893         50     2017.9    1939.0      1537       5061        517.1  cudaEventRecord       
+      0.0             2328          2     1164.0    1164.0       357       1971       1141.3  cudaEventCreate       
+      0.0             2300          2     1150.0    1150.0       322       1978       1171.0  cudaEventDestroy      
+      0.0             1779          1     1779.0    1779.0      1779       1779          0.0  cuModuleGetLoadingMode
+
+Processing [results/nsight/thrust-65536.sqlite] with [/opt/nvidia/nsight-systems/2026.3.2/target-linux-x64/reports/cuda_gpu_kern_sum.py]... 
+
+ ** CUDA GPU Kernel Summary (cuda_gpu_kern_sum):
+
+ Time (%)  Total Time (ns)  Instances  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)                                                  Name                                                
+ --------  ---------------  ---------  --------  --------  --------  --------  -----------  ----------------------------------------------------------------------------------------------------
+     65.6            80768         25    3230.7    3232.0      2720      3520        201.6  void cub::CUB_200302_900_NS::DeviceScanKernel<cub::CUB_200302_900_NS::DeviceScanPolicy<int, thrust:…
+     18.4            22656         25     906.2     896.0       864      1056         44.0  void thrust::THRUST_200302_900_NS::cuda_cub::core::_kernel_agent<thrust::THRUST_200302_900_NS::cuda…
+     16.0            19744         25     789.8     800.0       704       800         22.1  void cub::CUB_200302_900_NS::DeviceScanInitKernel<cub::CUB_200302_900_NS::ScanTileState<int, (bool)…
+
+Processing [results/nsight/thrust-65536.sqlite] with [/opt/nvidia/nsight-systems/2026.3.2/target-linux-x64/reports/cuda_gpu_mem_time_sum.py]... 
+
+ ** CUDA GPU MemOps Summary (by Time) (cuda_gpu_mem_time_sum):
+
+ Time (%)  Total Time (ns)  Count  Avg (ns)  Med (ns)  Min (ns)  Max (ns)  StdDev (ns)           Operation          
+ --------  ---------------  -----  --------  --------  --------  --------  -----------  ----------------------------
+     50.1           195488     25    7819.5    7648.0      7456      8480        332.4  [CUDA memcpy Device-to-Host]
+     49.9           194784     25    7791.4    7584.0      7424      8672        412.4  [CUDA memcpy Host-to-Device]
+

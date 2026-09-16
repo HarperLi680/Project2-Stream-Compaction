@@ -1,0 +1,30 @@
+
+===== Thrust: 65536 elements =====
+First measured scan: CPU API timeline
+Offset(us)  Duration(us)  API
+     1.412         1.386  cudaMalloc_v3020
+     4.323         3.253  cudaLaunchKernel_v7000
+     9.475         2.820  cudaLaunchKernel_v7000
+    13.280       317.733  cudaStreamSynchronize_v3020
+   331.437         3.068  cudaFree_v3020
+
+Median CPU API time per scan (microseconds):
+cudaFree_v3020: 2.848 us, 1 calls/scan
+cudaLaunchKernel_v7000: 5.950 us, 2 calls/scan
+cudaMalloc_v3020: 1.450 us, 1 calls/scan
+cudaStreamSynchronize_v3020: 308.453 us, 1 calls/scan
+
+===== Thrust: 262144 elements =====
+First measured scan: CPU API timeline
+Offset(us)  Duration(us)  API
+     1.482        78.378  cudaMalloc_v3020
+    81.683         4.030  cudaLaunchKernel_v7000
+    87.992         3.201  cudaLaunchKernel_v7000
+    92.181       299.930  cudaStreamSynchronize_v3020
+   392.730        83.159  cudaFree_v3020
+
+Median CPU API time per scan (microseconds):
+cudaFree_v3020: 82.184 us, 1 calls/scan
+cudaLaunchKernel_v7000: 6.979 us, 2 calls/scan
+cudaMalloc_v3020: 73.280 us, 1 calls/scan
+cudaStreamSynchronize_v3020: 289.105 us, 1 calls/scan

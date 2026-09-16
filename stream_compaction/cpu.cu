@@ -1,6 +1,6 @@
 #include <cstdio>
+#include <vector>
 #include "cpu.h"
-
 #include "common.h"
 
 namespace StreamCompaction {
@@ -17,10 +17,25 @@ namespace StreamCompaction {
          * For performance analysis, this is supposed to be a simple for loop.
          * (Optional) For better understanding before starting moving to GPU, you can simulate your GPU scan in this function first.
          */
+
+        static void scan(int n, int *odata, const int *idata, bool timed) {
+            if (timed) {
+                timer().startCpuTimer();
+            }
+
+            int sum = 0;
+            for (int i = 0; i < n; ++i) {
+                odata[i] = sum;
+                sum += idata[i];
+            }
+
+            if (timed) {
+                timer().endCpuTimer();
+            }
+        }
+
         void scan(int n, int *odata, const int *idata) {
-            timer().startCpuTimer();
-            // TODO
-            timer().endCpuTimer();
+            scan(n, odata, idata, true);
         }
 
         /**
@@ -30,9 +45,16 @@ namespace StreamCompaction {
          */
         int compactWithoutScan(int n, int *odata, const int *idata) {
             timer().startCpuTimer();
-            // TODO
+            int count = 0;
+            for (int i = 0; i < n; ++i) {
+                if (idata[i] != 0) {
+                    odata[count] = idata[i];
+                    ++count;
+                }
+            }
+
             timer().endCpuTimer();
-            return -1;
+            return count;
         }
 
         /**
@@ -41,10 +63,34 @@ namespace StreamCompaction {
          * @returns the number of elements remaining after compaction.
          */
         int compactWithScan(int n, int *odata, const int *idata) {
+            if (n <= 0) {
+                timer().startCpuTimer();
+                timer().endCpuTimer();
+                return 0;
+            }
+
+            std::vector<int> flags(n);
+            std::vector<int> indices(n);
+
             timer().startCpuTimer();
-            // TODO
+
+            for (int i = 0; i < n; ++i) {
+                flags[i] = idata[i] != 0 ? 1 : 0;
+            }
+
+            scan(n, indices.data(), flags.data(), false);
+
+            for (int i = 0; i < n; ++i) {
+                if (flags[i] != 0) {
+                    odata[indices[i]] = idata[i];
+                }
+            }
+
+            int count = indices[n - 1] + flags[n - 1];
+
             timer().endCpuTimer();
-            return -1;
+            return count;
         }
+
     }
 }
