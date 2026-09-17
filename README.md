@@ -12,7 +12,7 @@ CUDA Stream Compaction
 
 This project implements exclusive prefix sum and stream compaction.
 
-Four scan implementations are included:
+The four base scan implementations are:
 
 - **CPU:** A sequential loop that keeps a running sum.
 - **Naive:** A GPU scan that adds values from increasing offsets using two alternating buffers.
@@ -168,3 +168,97 @@ cmake --build build -j2
 ~~~
 
 The `sm_90` setting targets the H200 used for these experiments.
+
+### Extra Credit
+
+The earlier performance figures show the original implementation. The following results cover the extra-credit versions.
+
+#### Work-Efficient Scan Optimization
+
+The global-memory scan assigns threads to active tree nodes and reduces the number of blocks at each upsweep level. The fused version also combines the upper levels, root reset, and corresponding downsweep levels into one kernel once the active nodes fit in a single block. Threads synchronize between levels.
+
+Both the baseline and fused versions use active-node indexing, so this comparison measures the additional effect of fusion. At 1,048,576 elements and 128 threads per block, fusion reduces the scan from 41 kernel launches to 25.
+
+![Baseline and fused scan](img/extra-fusion.png)
+
+| Elements | Baseline (ms) | Fused (ms) | Time reduction |
+| --- | ---: | ---: | ---: |
+| 256 | 0.032128 | 0.006976 | 78.3% |
+| 1,048,576 | 0.243584 | 0.219008 | 10.1% |
+
+The benefit was larger for small arrays, where kernel launch overhead can be a large part of the total time. At 65,536 elements, timings varied considerably and the fused version was slower in one run. The updated implementation passed all 98 existing edge checks.
+
+#### Radix Sort
+
+The new `RadixSort` module sorts signed 32-bit integers using 32 least-significant-bit passes. Each pass marks zero bits, scans those flags using the project's own `Efficient::scanDevice`, and scatters values into zero-bit and one-bit groups while preserving their order. Flipping the sign bit when forming the sort key puts negative values before nonnegative values.
+
+Example:
+
+```cpp
+#include "stream_compaction/radix_sort.h"
+
+int input[] = {5, -3, 0, 128, 5, 7, -1000, 2};
+int output[8];
+StreamCompaction::RadixSort::sort(8, output, input);
+```
+
+```text
+Sorted output: -1000 -3 0 2 5 5 7 128
+ALL RADIX SORT TESTS PASSED
+```
+
+All 21 tests passed against `std::sort`, including empty inputs, negative values, repeated keys, integer limits, and arrays of up to 1,048,576 elements.
+
+#### Shared-Memory Scan
+
+Three versions were added based on [GPU Gems 3, Chapter 39](https://developer.nvidia.com/gpugems/gpugems3/part-vi-gpu-computing/chapter-39-parallel-prefix-sum-scan-cuda):
+
+- **SharedNaive:** double-buffered shared-memory scan based on Example 39.1.
+- **SharedEfficient:** shared-memory upsweep and downsweep based on Example 39.2.
+- **SharedPadded:** the same tree scan with padding intended to reduce bank conflicts, following the approach in Section 39.2.3.
+
+Each block processes two elements per thread. For larger arrays, all three versions scan block totals using the existing fused global-memory scan, then add the resulting offsets to each block's output. Partial tiles are filled with zeros. All 192 checks passed across four block sizes, including tile boundaries, negative values, and million-element inputs.
+
+Shared memory is allocated dynamically. With B threads, SharedNaive uses 4B integers and SharedEfficient uses 2B. The padded version maps index i to `i + (i >> 5) + (i >> 10)` and allocates space for the extra entries. Larger blocks increase shared-memory usage per block and change the number of tiles. These resource requirements can affect occupancy, but occupancy and bank-conflict counters were not measured here.
+
+![Shared scan block sizes](img/extra-shared-block-size.png)
+
+At 1,048,576 elements, 512 threads per block gave the lowest median time for each shared-memory version. At 4,194,304 elements, SharedNaive was fastest with 512 threads, while SharedEfficient and SharedPadded were fastest with 256. A larger block was therefore not always better.
+
+![Shared scan array sizes at fixed block size](img/extra-shared-array-size.png)
+
+The array-size graph holds all versions at 128 threads per block. At 4,194,304 elements:
+
+| Version | Median scan time (ms) |
+| --- | ---: |
+| FusedEfficient | 0.272272 |
+| SharedNaive | 0.079472 |
+| SharedEfficient | 0.101504 |
+| SharedPadded | 0.104000 |
+
+SharedNaive was fastest here, even though it performs more additions per tile. Its simpler scan structure may help, but these timings alone do not explain the difference.
+
+Padding did not give a consistent improvement. At 4,194,304 elements and 512 threads, it reduced the median from 0.105600 to 0.104816 ms, about 0.7%. With 64 threads, it increased the median from 0.119824 to 0.125408 ms, about 4.7%.
+
+#### Extra Credit Benchmark Method
+
+Both experiments used optimized builds targeting `sm_90` on the NVIDIA H200. Each configuration had five warm-up calls and 20 measured calls, repeated in three runs with changing configuration order. Reported values are medians of the three run medians. Shading shows the minimum and maximum run medians, not confidence intervals. Every benchmark call was checked against a CPU reference outside the timed interval.
+
+CUDA event timing excludes input/output host-device transfers and buffer allocation. Shared-scan timing includes tile scans, the block-total scan, and offset addition. The fusion experiment and shared-memory experiment were separate runs; their absolute times should not be treated as interchangeable. In the shared-memory experiment, FusedEfficient at 65,536 elements ranged from 0.042112 to 0.356864 ms. The cause of this variation was not isolated.
+
+Benchmark data and test logs are available in `results/extra-credit/`.
+
+#### Additional Build Changes
+
+The radix-sort and shared-scan modules were added to the `stream_compaction` library in its CMake file. The extra tests are compiled separately against that library:
+
+```bash
+cmake --build build -j2
+
+for test in radix_sort_tests shared_scan_tests; do
+    /usr/local/cuda/bin/nvcc -std=c++17 -O3 -arch=sm_90 \
+        -I. tests/$test.cu build/lib/libstream_compaction.a \
+        -o build/bin/$test
+    ./build/bin/$test
+done
+```

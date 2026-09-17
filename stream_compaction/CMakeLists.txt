@@ -4,6 +4,7 @@ set(headers
     "naive.h"
     "efficient.h"
     "thrust.h"
+    "radix_sort.h"
     )
 
 set(sources
@@ -12,6 +13,7 @@ set(sources
     "naive.cu"
     "efficient.cu"
     "thrust.cu"
+    "radix_sort.cu"
     )
 
 list(SORT headers)
@@ -30,3 +32,8 @@ else()
 endif()
 target_compile_options(stream_compaction PRIVATE "$<$<AND:$<CONFIG:Debug,RelWithDebInfo>,$<COMPILE_LANGUAGE:CUDA>>:-G;-src-in-ptx>")
 target_compile_options(stream_compaction PRIVATE "$<$<AND:$<CONFIG:Release>,$<COMPILE_LANGUAGE:CUDA>>:-lineinfo;-src-in-ptx>")
+
+target_sources(stream_compaction PRIVATE
+    shared_scan.h
+    shared_scan.cu
+)

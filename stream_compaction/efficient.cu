@@ -47,7 +47,9 @@ namespace StreamCompaction {
             data[right] += temp;
         }
 
-        void scanDevice(int size, int *data) {
+        // Original version for performance comparison.
+        // size must be a positive power of two.
+        void scanDeviceBaseline(int size, int *data) {
             int levels = ilog2ceil(size);
 
             for (int d = 0; d < levels; ++d) {
@@ -63,6 +65,83 @@ namespace StreamCompaction {
             checkCUDAError("Reset root failed");
 
             for (int d = levels - 1; d >= 0; --d) {
+                int stride = 1 << (d + 1);
+                int count = size / stride;
+                int blocks = (count + blockSize - 1) / blockSize;
+
+                kernDownsweep<<<blocks, blockSize>>>(count, stride, data);
+                checkCUDAError("Downsweep failed");
+            }
+        }
+
+        __global__ void kernScanTop(
+            int size, int firstLevel, int levels, int *data) {
+
+            int i = threadIdx.x;
+
+            // Complete the upper levels within one block.
+            for (int d = firstLevel; d < levels; ++d) {
+                int stride = 1 << (d + 1);
+                int count = size / stride;
+
+                if (i < count) {
+                    int right = (i + 1) * stride - 1;
+                    int left = right - stride / 2;
+
+                    data[right] += data[left];
+                }
+
+                __syncthreads();
+            }
+
+            if (i == 0) {
+                data[size - 1] = 0;
+            }
+
+            __syncthreads();
+
+            for (int d = levels - 1; d >= firstLevel; --d) {
+                int stride = 1 << (d + 1);
+                int count = size / stride;
+
+                if (i < count) {
+                    int right = (i + 1) * stride - 1;
+                    int left = right - stride / 2;
+
+                    int temp = data[left];
+                    data[left] = data[right];
+                    data[right] += temp;
+                }
+
+                __syncthreads();
+            }
+        }
+
+        // Optimized version: combine the small upper levels.
+        // size must be a positive power of two.
+        void scanDevice(int size, int *data) {
+            int levels = ilog2ceil(size);
+
+            int firstLevel = 0;
+            while (firstLevel < levels &&
+                   (size >> (firstLevel + 1)) > blockSize) {
+                ++firstLevel;
+            }
+
+            for (int d = 0; d < firstLevel; ++d) {
+                int stride = 1 << (d + 1);
+                int count = size / stride;
+                int blocks = (count + blockSize - 1) / blockSize;
+
+                kernUpsweep<<<blocks, blockSize>>>(count, stride, data);
+                checkCUDAError("Upsweep failed");
+            }
+
+            kernScanTop<<<1, blockSize>>>(
+                size, firstLevel, levels, data);
+            checkCUDAError("Combined scan levels failed");
+
+            for (int d = firstLevel - 1; d >= 0; --d) {
                 int stride = 1 << (d + 1);
                 int count = size / stride;
                 int blocks = (count + blockSize - 1) / blockSize;

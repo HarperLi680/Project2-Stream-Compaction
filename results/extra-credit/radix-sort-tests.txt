@@ -1,0 +1,23 @@
+Empty | n=0 | PASS
+Single zero | n=1 | PASS
+Single negative | n=1 | PASS
+All equal | n=1000 | PASS
+Sorted | n=6 | PASS
+Reversed | n=6 | PASS
+Example | n=8 | PASS
+Sorted output: -1000 -3 0 2 5 5 7 128
+Integer limits | n=7 | PASS
+Random signed integers | n=127 | PASS
+Random signed integers | n=128 | PASS
+Random signed integers | n=129 | PASS
+Random signed integers | n=255 | PASS
+Random signed integers | n=256 | PASS
+Random signed integers | n=257 | PASS
+Random signed integers | n=511 | PASS
+Random signed integers | n=512 | PASS
+Random signed integers | n=513 | PASS
+Random signed integers | n=10000 | PASS
+Random signed integers | n=1048573 | PASS
+Random signed integers | n=1048576 | PASS
+Repeated keys | n=10000 | PASS
+ALL RADIX SORT TESTS PASSED

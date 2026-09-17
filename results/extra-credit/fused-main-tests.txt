@@ -1,0 +1,53 @@
+
+****************
+** SCAN TESTS **
+****************
+    [  35  47  32   8  43  29  36  22  19  11  18  21  41 ...  38   0 ]
+==== cpu scan, power-of-two ====
+   elapsed time: 0.685781ms    (std::chrono Measured)
+    [   0  35  82 114 122 165 194 230 252 271 282 300 321 ... 25700912 25700950 ]
+==== cpu scan, non-power-of-two ====
+   elapsed time: 0.592774ms    (std::chrono Measured)
+    [   0  35  82 114 122 165 194 230 252 271 282 300 321 ... 25700851 25700865 ]
+    passed 
+==== naive scan, power-of-two ====
+   elapsed time: 0.810976ms    (CUDA Measured)
+    passed 
+==== naive scan, non-power-of-two ====
+   elapsed time: 0.2672ms    (CUDA Measured)
+    passed 
+==== work-efficient scan, power-of-two ====
+   elapsed time: 0.89536ms    (CUDA Measured)
+    passed 
+==== work-efficient scan, non-power-of-two ====
+   elapsed time: 0.341664ms    (CUDA Measured)
+    passed 
+==== thrust scan, power-of-two ====
+   elapsed time: 1.13424ms    (CUDA Measured)
+    passed 
+==== thrust scan, non-power-of-two ====
+   elapsed time: 0.383968ms    (CUDA Measured)
+    passed 
+
+*****************************
+** STREAM COMPACTION TESTS **
+*****************************
+    [   3   3   0   0   1   3   2   0   1   3   0   1   3 ...   2   0 ]
+==== cpu compact without scan, power-of-two ====
+   elapsed time: 2.25913ms    (std::chrono Measured)
+    [   3   3   1   3   2   1   3   1   3   3   3   1   1 ...   2   2 ]
+    passed 
+==== cpu compact without scan, non-power-of-two ====
+   elapsed time: 2.24464ms    (std::chrono Measured)
+    [   3   3   1   3   2   1   3   1   3   3   3   1   1 ...   2   3 ]
+    passed 
+==== cpu compact with scan ====
+   elapsed time: 3.15193ms    (std::chrono Measured)
+    [   3   3   1   3   2   1   3   1   3   3   3   1   1 ...   2   2 ]
+    passed 
+==== work-efficient compact, power-of-two ====
+   elapsed time: 0.58496ms    (CUDA Measured)
+    passed 
+==== work-efficient compact, non-power-of-two ====
+   elapsed time: 0.095968ms    (CUDA Measured)
+    passed 

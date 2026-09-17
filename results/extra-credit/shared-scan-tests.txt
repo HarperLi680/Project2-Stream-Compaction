@@ -1,0 +1,195 @@
+Empty | Shared Naive | n=0 | block=64 | PASS
+Empty | Shared Efficient | n=0 | block=64 | PASS
+Empty | Shared Padded | n=0 | block=64 | PASS
+Single zero | Shared Naive | n=1 | block=64 | PASS
+Single zero | Shared Efficient | n=1 | block=64 | PASS
+Single zero | Shared Padded | n=1 | block=64 | PASS
+Single negative | Shared Naive | n=1 | block=64 | PASS
+Single negative | Shared Efficient | n=1 | block=64 | PASS
+Single negative | Shared Padded | n=1 | block=64 | PASS
+Example | Shared Naive | n=4 | block=64 | PASS
+Example | Shared Efficient | n=4 | block=64 | PASS
+Example | Shared Padded | n=4 | block=64 | PASS
+Mixed signs | Shared Naive | n=6 | block=64 | PASS
+Mixed signs | Shared Efficient | n=6 | block=64 | PASS
+Mixed signs | Shared Padded | n=6 | block=64 | PASS
+All zeros | Shared Naive | n=129 | block=64 | PASS
+All zeros | Shared Efficient | n=129 | block=64 | PASS
+All zeros | Shared Padded | n=129 | block=64 | PASS
+All ones | Shared Naive | n=259 | block=64 | PASS
+All ones | Shared Efficient | n=259 | block=64 | PASS
+All ones | Shared Padded | n=259 | block=64 | PASS
+Random signed integers | Shared Naive | n=127 | block=64 | PASS
+Random signed integers | Shared Efficient | n=127 | block=64 | PASS
+Random signed integers | Shared Padded | n=127 | block=64 | PASS
+Random signed integers | Shared Naive | n=128 | block=64 | PASS
+Random signed integers | Shared Efficient | n=128 | block=64 | PASS
+Random signed integers | Shared Padded | n=128 | block=64 | PASS
+Random signed integers | Shared Naive | n=129 | block=64 | PASS
+Random signed integers | Shared Efficient | n=129 | block=64 | PASS
+Random signed integers | Shared Padded | n=129 | block=64 | PASS
+Random signed integers | Shared Naive | n=255 | block=64 | PASS
+Random signed integers | Shared Efficient | n=255 | block=64 | PASS
+Random signed integers | Shared Padded | n=255 | block=64 | PASS
+Random signed integers | Shared Naive | n=256 | block=64 | PASS
+Random signed integers | Shared Efficient | n=256 | block=64 | PASS
+Random signed integers | Shared Padded | n=256 | block=64 | PASS
+Random signed integers | Shared Naive | n=257 | block=64 | PASS
+Random signed integers | Shared Efficient | n=257 | block=64 | PASS
+Random signed integers | Shared Padded | n=257 | block=64 | PASS
+Random signed integers | Shared Naive | n=10000 | block=64 | PASS
+Random signed integers | Shared Efficient | n=10000 | block=64 | PASS
+Random signed integers | Shared Padded | n=10000 | block=64 | PASS
+Random signed integers | Shared Naive | n=1048573 | block=64 | PASS
+Random signed integers | Shared Efficient | n=1048573 | block=64 | PASS
+Random signed integers | Shared Padded | n=1048573 | block=64 | PASS
+Random signed integers | Shared Naive | n=1048576 | block=64 | PASS
+Random signed integers | Shared Efficient | n=1048576 | block=64 | PASS
+Random signed integers | Shared Padded | n=1048576 | block=64 | PASS
+Empty | Shared Naive | n=0 | block=128 | PASS
+Empty | Shared Efficient | n=0 | block=128 | PASS
+Empty | Shared Padded | n=0 | block=128 | PASS
+Single zero | Shared Naive | n=1 | block=128 | PASS
+Single zero | Shared Efficient | n=1 | block=128 | PASS
+Single zero | Shared Padded | n=1 | block=128 | PASS
+Single negative | Shared Naive | n=1 | block=128 | PASS
+Single negative | Shared Efficient | n=1 | block=128 | PASS
+Single negative | Shared Padded | n=1 | block=128 | PASS
+Example | Shared Naive | n=4 | block=128 | PASS
+Example | Shared Efficient | n=4 | block=128 | PASS
+Example | Shared Padded | n=4 | block=128 | PASS
+Mixed signs | Shared Naive | n=6 | block=128 | PASS
+Mixed signs | Shared Efficient | n=6 | block=128 | PASS
+Mixed signs | Shared Padded | n=6 | block=128 | PASS
+All zeros | Shared Naive | n=257 | block=128 | PASS
+All zeros | Shared Efficient | n=257 | block=128 | PASS
+All zeros | Shared Padded | n=257 | block=128 | PASS
+All ones | Shared Naive | n=515 | block=128 | PASS
+All ones | Shared Efficient | n=515 | block=128 | PASS
+All ones | Shared Padded | n=515 | block=128 | PASS
+Random signed integers | Shared Naive | n=255 | block=128 | PASS
+Random signed integers | Shared Efficient | n=255 | block=128 | PASS
+Random signed integers | Shared Padded | n=255 | block=128 | PASS
+Random signed integers | Shared Naive | n=256 | block=128 | PASS
+Random signed integers | Shared Efficient | n=256 | block=128 | PASS
+Random signed integers | Shared Padded | n=256 | block=128 | PASS
+Random signed integers | Shared Naive | n=257 | block=128 | PASS
+Random signed integers | Shared Efficient | n=257 | block=128 | PASS
+Random signed integers | Shared Padded | n=257 | block=128 | PASS
+Random signed integers | Shared Naive | n=511 | block=128 | PASS
+Random signed integers | Shared Efficient | n=511 | block=128 | PASS
+Random signed integers | Shared Padded | n=511 | block=128 | PASS
+Random signed integers | Shared Naive | n=512 | block=128 | PASS
+Random signed integers | Shared Efficient | n=512 | block=128 | PASS
+Random signed integers | Shared Padded | n=512 | block=128 | PASS
+Random signed integers | Shared Naive | n=513 | block=128 | PASS
+Random signed integers | Shared Efficient | n=513 | block=128 | PASS
+Random signed integers | Shared Padded | n=513 | block=128 | PASS
+Random signed integers | Shared Naive | n=10000 | block=128 | PASS
+Random signed integers | Shared Efficient | n=10000 | block=128 | PASS
+Random signed integers | Shared Padded | n=10000 | block=128 | PASS
+Random signed integers | Shared Naive | n=1048573 | block=128 | PASS
+Random signed integers | Shared Efficient | n=1048573 | block=128 | PASS
+Random signed integers | Shared Padded | n=1048573 | block=128 | PASS
+Random signed integers | Shared Naive | n=1048576 | block=128 | PASS
+Random signed integers | Shared Efficient | n=1048576 | block=128 | PASS
+Random signed integers | Shared Padded | n=1048576 | block=128 | PASS
+Empty | Shared Naive | n=0 | block=256 | PASS
+Empty | Shared Efficient | n=0 | block=256 | PASS
+Empty | Shared Padded | n=0 | block=256 | PASS
+Single zero | Shared Naive | n=1 | block=256 | PASS
+Single zero | Shared Efficient | n=1 | block=256 | PASS
+Single zero | Shared Padded | n=1 | block=256 | PASS
+Single negative | Shared Naive | n=1 | block=256 | PASS
+Single negative | Shared Efficient | n=1 | block=256 | PASS
+Single negative | Shared Padded | n=1 | block=256 | PASS
+Example | Shared Naive | n=4 | block=256 | PASS
+Example | Shared Efficient | n=4 | block=256 | PASS
+Example | Shared Padded | n=4 | block=256 | PASS
+Mixed signs | Shared Naive | n=6 | block=256 | PASS
+Mixed signs | Shared Efficient | n=6 | block=256 | PASS
+Mixed signs | Shared Padded | n=6 | block=256 | PASS
+All zeros | Shared Naive | n=513 | block=256 | PASS
+All zeros | Shared Efficient | n=513 | block=256 | PASS
+All zeros | Shared Padded | n=513 | block=256 | PASS
+All ones | Shared Naive | n=1027 | block=256 | PASS
+All ones | Shared Efficient | n=1027 | block=256 | PASS
+All ones | Shared Padded | n=1027 | block=256 | PASS
+Random signed integers | Shared Naive | n=511 | block=256 | PASS
+Random signed integers | Shared Efficient | n=511 | block=256 | PASS
+Random signed integers | Shared Padded | n=511 | block=256 | PASS
+Random signed integers | Shared Naive | n=512 | block=256 | PASS
+Random signed integers | Shared Efficient | n=512 | block=256 | PASS
+Random signed integers | Shared Padded | n=512 | block=256 | PASS
+Random signed integers | Shared Naive | n=513 | block=256 | PASS
+Random signed integers | Shared Efficient | n=513 | block=256 | PASS
+Random signed integers | Shared Padded | n=513 | block=256 | PASS
+Random signed integers | Shared Naive | n=1023 | block=256 | PASS
+Random signed integers | Shared Efficient | n=1023 | block=256 | PASS
+Random signed integers | Shared Padded | n=1023 | block=256 | PASS
+Random signed integers | Shared Naive | n=1024 | block=256 | PASS
+Random signed integers | Shared Efficient | n=1024 | block=256 | PASS
+Random signed integers | Shared Padded | n=1024 | block=256 | PASS
+Random signed integers | Shared Naive | n=1025 | block=256 | PASS
+Random signed integers | Shared Efficient | n=1025 | block=256 | PASS
+Random signed integers | Shared Padded | n=1025 | block=256 | PASS
+Random signed integers | Shared Naive | n=10000 | block=256 | PASS
+Random signed integers | Shared Efficient | n=10000 | block=256 | PASS
+Random signed integers | Shared Padded | n=10000 | block=256 | PASS
+Random signed integers | Shared Naive | n=1048573 | block=256 | PASS
+Random signed integers | Shared Efficient | n=1048573 | block=256 | PASS
+Random signed integers | Shared Padded | n=1048573 | block=256 | PASS
+Random signed integers | Shared Naive | n=1048576 | block=256 | PASS
+Random signed integers | Shared Efficient | n=1048576 | block=256 | PASS
+Random signed integers | Shared Padded | n=1048576 | block=256 | PASS
+Empty | Shared Naive | n=0 | block=512 | PASS
+Empty | Shared Efficient | n=0 | block=512 | PASS
+Empty | Shared Padded | n=0 | block=512 | PASS
+Single zero | Shared Naive | n=1 | block=512 | PASS
+Single zero | Shared Efficient | n=1 | block=512 | PASS
+Single zero | Shared Padded | n=1 | block=512 | PASS
+Single negative | Shared Naive | n=1 | block=512 | PASS
+Single negative | Shared Efficient | n=1 | block=512 | PASS
+Single negative | Shared Padded | n=1 | block=512 | PASS
+Example | Shared Naive | n=4 | block=512 | PASS
+Example | Shared Efficient | n=4 | block=512 | PASS
+Example | Shared Padded | n=4 | block=512 | PASS
+Mixed signs | Shared Naive | n=6 | block=512 | PASS
+Mixed signs | Shared Efficient | n=6 | block=512 | PASS
+Mixed signs | Shared Padded | n=6 | block=512 | PASS
+All zeros | Shared Naive | n=1025 | block=512 | PASS
+All zeros | Shared Efficient | n=1025 | block=512 | PASS
+All zeros | Shared Padded | n=1025 | block=512 | PASS
+All ones | Shared Naive | n=2051 | block=512 | PASS
+All ones | Shared Efficient | n=2051 | block=512 | PASS
+All ones | Shared Padded | n=2051 | block=512 | PASS
+Random signed integers | Shared Naive | n=1023 | block=512 | PASS
+Random signed integers | Shared Efficient | n=1023 | block=512 | PASS
+Random signed integers | Shared Padded | n=1023 | block=512 | PASS
+Random signed integers | Shared Naive | n=1024 | block=512 | PASS
+Random signed integers | Shared Efficient | n=1024 | block=512 | PASS
+Random signed integers | Shared Padded | n=1024 | block=512 | PASS
+Random signed integers | Shared Naive | n=1025 | block=512 | PASS
+Random signed integers | Shared Efficient | n=1025 | block=512 | PASS
+Random signed integers | Shared Padded | n=1025 | block=512 | PASS
+Random signed integers | Shared Naive | n=2047 | block=512 | PASS
+Random signed integers | Shared Efficient | n=2047 | block=512 | PASS
+Random signed integers | Shared Padded | n=2047 | block=512 | PASS
+Random signed integers | Shared Naive | n=2048 | block=512 | PASS
+Random signed integers | Shared Efficient | n=2048 | block=512 | PASS
+Random signed integers | Shared Padded | n=2048 | block=512 | PASS
+Random signed integers | Shared Naive | n=2049 | block=512 | PASS
+Random signed integers | Shared Efficient | n=2049 | block=512 | PASS
+Random signed integers | Shared Padded | n=2049 | block=512 | PASS
+Random signed integers | Shared Naive | n=10000 | block=512 | PASS
+Random signed integers | Shared Efficient | n=10000 | block=512 | PASS
+Random signed integers | Shared Padded | n=10000 | block=512 | PASS
+Random signed integers | Shared Naive | n=1048573 | block=512 | PASS
+Random signed integers | Shared Efficient | n=1048573 | block=512 | PASS
+Random signed integers | Shared Padded | n=1048573 | block=512 | PASS
+Random signed integers | Shared Naive | n=1048576 | block=512 | PASS
+Random signed integers | Shared Efficient | n=1048576 | block=512 | PASS
+Random signed integers | Shared Padded | n=1048576 | block=512 | PASS
+
+Tests: 192 | Passed: 192 | Failed: 0
+ALL SHARED SCAN TESTS PASSED
